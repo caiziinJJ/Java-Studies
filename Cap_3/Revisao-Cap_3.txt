@@ -1,0 +1,23 @@
+- Como declaramos uma classe?
+- Qual a diferença de nomeação de classes e variáveis/métodos
+- Como chamamos as variáveis das instâncias das classes que criamos(objetos)?
+- Na definição dos atributos de uma classe colocamos o acesso como public ou private? Por que?
+- Cite os elementos que compõem a declaração de um método
+- Para que serve o "this."??
+- O que é uma "classe driver/condutora"?
+- Como lemos um texto fornecido pelo usuário
+- Por que existem parêntesis no final de uma criação de objeto ( Account conta = new Accoun(); )
+- Como compilamos mais de uma classe de uma vez? E como compilamos todas??
+- Como uma classe é demonstrada segundo a linguagem UML. Como seus atributos e métodos são espostos?
+- Qual a função de "static" na declaração da classe main "public static void main(String[] args)" ?
+- Quando não precisamos importar uma classe?
+- Como fazemos pra criar um objeto de uma classe que não importamos? Diga a frase utilizada nessa ação.
+- O que é uma "variável por referência"?
+- Como fazemos para criar um objeto que já possua um "nome" atribuído?
+- Caso definamos um construtor para nossa classe, conseguiremos criar um objeto sem iniciar nenhum valor? Discorra.
+- Como representamos um método construtor em UML
+- Como criamos um construtor que aceita mais de um parâmetro?
+- Como limitamos a quantidade de casas decimais que serão mostradas?
+- Qual é o nome da classe que fornece caixas de diálogo pré-modeladas e o nome do pacote que a contém?
+- Devemos criar objetos da "classe que fornece caixas de diálogo pré-modeladas" para usar os métodos de exibição? Discorra.
+

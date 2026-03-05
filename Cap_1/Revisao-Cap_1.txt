@@ -1,0 +1,7 @@
+- O que é a lei de Moore
+- Quantos tipo de programação o Java Suporta
+- Quais são as unidades lógicas que um computador tem?
+- Cite a hierarquia dos dados
+- Quais são os tipos de linguagem existentes?
+- Cite os principais conceitos introduzidos no tópico "Introdução à tecnologia de objetos"
+- Cite o passo a passo da execução de uma aplicação Java.

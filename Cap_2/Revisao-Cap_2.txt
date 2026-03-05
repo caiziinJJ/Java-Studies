@@ -1,0 +1,31 @@
+- Como criamos uma classe?
+- System.out.println("Welcome to Java Programming!") - Destaque as três partes integrantes desse comando
+- Qual a função da contra-barra? Cite os exemplos em que ela é usada
+- Diferencie os métodos "println" de "printf" do objeto "System.out".
+- Qual comando utilizamos para permitir que o usuário nos forneça dados?
+- Como importamos classes?
+- O livro nos apresenta o conceito de destrutivo e não destrutivo. Em que contexto ele usa esses termos e o que ele quer explicar com eles?
+-  
+
+
+import java.util.scanner;
+
+public class Teste {
+	public static void main(String[] args){
+		int n1, n2. n3, resultado;
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Digite o primeiro número");
+		n1 = input.nextInt();
+		
+		System.out.println("Digite o segundo número");
+		n2 = input.nextInt();
+		
+		System.out.println("Digite o terceiro número");
+		n3 = input.nextInt();
+		
+		resultado = n1 * n2 * n3;
+		
+		System.out.printf("%s%d%n", "O produto dos três números é: ", resultado);
+	}
+}
