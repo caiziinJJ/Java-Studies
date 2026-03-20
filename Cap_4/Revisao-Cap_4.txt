@@ -1,0 +1,4 @@
+1 - O que é um algoritmo?
+2 - Defina pseudocódigo
+3 - A programação estruturada surgiu à partir de qual problema?
+4 - 
