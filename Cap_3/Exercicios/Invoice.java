@@ -5,39 +5,39 @@ public class Invoice{
     private double price;
 
     public Invoice(String number, String description, int quantityBought, double price){
-        number = this.number;
-        description = this.description;
-        if (this.quantityBought <= 0 ){
-            quantityBought = 0;
+        this.number = number;  //O this.number representa o atributo "number" do objeto que será criado
+        this.description = description;
+        if (quantityBought <= 0 ){
+            this.quantityBought = 0;
         }
         else {
-            quantityBought = this.quantityBought;
+            this.quantityBought = quantityBought;
         }
-        if (this.price <= 0 ){
-            price = 0;
+        if (price <= 0 ){
+            this.price = 0;
         }
         else {
-            price = this.price;
+            this.price = price;
         }
     }
     public String getNumber(){
         return number;
     }
     public void setNumber(String number){
-        String numberString = this.number;
+        String numberString = number;
         double numberDouble = Double.parseDouble(numberString);
         if (numberDouble <=0){
             System.out.println("Invalid quantity");
         }
         else {
-            number = numberString;
+            this.number = numberString;
         }
     }
     public String getDescription(){
-        return description;
+        return this.description;
     }
     public void setDescription(String description){
-        description = this.description;
+        this.description = description;
     }
     public String getQuantityBought(){
         String quantityString = String.valueOf(quantityBought);
@@ -48,18 +48,18 @@ public class Invoice{
             System.out.println("Invalid quantity");
         }
         else {
-            quantityBought = this.quantityBought;
+            this.quantityBought = quantityBought;
         }
     }
-    public String getPrice(){
-        return number;
+    public double getPrice(){
+        return price;
     }
     public void setPrice(double price){
-        if (this.price <= 0 ){
-            price = 0;
+        if (price <= 0 ){
+            this.price = 0;
         }
         else {
-            price = this.price;
+            this.price = price;
         }
     }
     public double getInvoiceAmount(){

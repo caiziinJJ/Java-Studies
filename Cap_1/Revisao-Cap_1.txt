@@ -1,7 +1,36 @@
-- O que é a lei de Moore
-- Quantos tipo de programação o Java Suporta
-- Quais são as unidades lógicas que um computador tem?
-- Cite a hierarquia dos dados
-- Quais são os tipos de linguagem existentes?
-- Cite os principais conceitos introduzidos no tópico "Introdução à tecnologia de objetos"
-- Cite o passo a passo da execução de uma aplicação Java.
+1 - O que é a lei de Moore
+2 - Quantos tipo de programação o Java Suporta
+3 - Quais são as unidades lógicas que um computador tem?
+4 - Cite as etapas de "crescimento" dos dados. Desde Bit até Big Data.
+5 - Quais são os tipos de linguagem existentes?
+6 - Explique os seguintes conceitos: Reutilização, Chamada, Atibutos, Encapsulamento, Herança, Interface, OOAD/APOO(Cite seu nome completo em português e em inglês) e UML. 
+7 - Cite o passo a passo da execução de uma aplicação Java.
+
+---
+
+Gabarito
+
+1 - Lei de mooore é o conceito de que a técnologia com o tempo ela fica melhor e mais barata
+2 - 4, Linguagem orientada a objetos, linguagem procedural, linguagem genérica e linguagem funcional.
+3 - Unidade de entrada, unidade de saída, Unidade lógica e aritmética, unidade de processamento, unidade de armazenamento secundária e unidade de armazenamento primária.
+4 - Bit -> Carácter -> Campo -> Registro -> Arquivo -> Banco de Dados -> Big Data
+5 - Linguagem de máquina, Linguagem Assembly, Linguagem de Alto nível, Linguagem Interpretada
+6 - 
+Objetos: São a expressão de projetos no mundo real. Um objeto é a implementação de uma classe com sua característica individuais estabelecidas, assim como todos os Renault Logans 2013, bem como sua forma de acelerar e freiar que podem ser melhores ou piores dependendo de qual carro você olhar, são objetos do projeto Renault Logan 2012/2013.
+
+Instância: É você criar algo a partir de uma classe. Por exemplo podemos ter a classe "SerHumano.class"onde à partir dela criaremos vários seres humanos diferentes que compartilham características definidas na classe "SerHumano.class"
+
+Reutilização de projeto: O ato de poder criar instância à partir de uma classe.
+Chamada: É o ato de você utilizar o método(que é uma ação) de uma classe utilizando um objeto criado por ela(chamada de método).
+
+Atributos: São campos que vão representar as características dos nossos objetos. Por padrão eles sempre são iniciados no momento da instanciação da classe, ou seja, no momento da criação do objeto.
+
+Encapsulamento: Classes e objetos da classe possuem ligação, porém os detalhes de cada objeto só dizem respeito ao próprio objeto.
+Herança: É você poder re-utilizar classes e métodos herdando eles. Por exemplo, podemos criar uma classe à partir de outra utilizando a herança e assim escrever o código referente as adições/alterações que faremos nessa classe, pois ela possui as mesmas características que sua classe mãe.
+
+Interface: Tela
+OOAD/APOO(Object-Oriented Analysis and Design / Análise e Projeto Orientado a Objeto): Utilizado para o desenvolvimento de projetos grandes ou se integrar à projetos já em desenvolvimento.
+
+UML: Unified Modeling Language - É a linguagem de modelação, usamos ela pra modelarmos as classes e métodos da nossa aplicação.
+
+7 - Primeiro ele pega a classe .java e a transforma em bytecode criando um arquivo .class, garantindo o princípio que esse app rode em todos os tipos de dispositivos. Após esse momento executamos o arquivo com a extensão .class dentro da JVM e o app roda.

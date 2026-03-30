@@ -1,4 +1,8 @@
-1 - O que é um algoritmo?
-2 - Defina pseudocódigo
-3 - A programação estruturada surgiu à partir de qual problema?
+1 - O que são algorítmos ?
+
+2 - O que  é um pseudocódigo?
+
+3 - Cite as 3 estruturas de controle idealizadas pelos pesquisadores Bohm e Jacopini bem como o problemas
+que elas resolveram.
+
 4 - 
