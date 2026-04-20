@@ -5,4 +5,51 @@
 3 - Cite as 3 estruturas de controle idealizadas pelos pesquisadores Bohm e Jacopini bem como o problemas
 que elas resolveram.
 
-4 - 
+4 - Como funciona a estrutura de sequência única?
+
+5 - Como funciona a estrutura de sequência dupla?
+
+6 - Como funciona a estrutura de sequência múltipla?
+
+7 - Qual é uma boa pratica para se ter quando estamos utilizando if's aninhados
+
+8 - O que são "blocos"?
+
+9 - Explique "?:" .
+
+10 - O que é uma estrutura de repetição? 
+
+11 - Explique o while
+
+12 - Para que serve uma variável de controle? De um exemplo.
+
+13 - O que são variáveis locais?
+
+14 - Do que o loop pode ser chamado?
+
+15 - Qual será o resultado de uma divisão de inteiro que resultaria em um número de ponto flutuante?
+
+16 - O que devemos fazer para evitar problemas na hora de solicitar dados ao usuário?
+
+17 - Me explique o que é uma repetição controlada por sentinela
+
+18 - Como armazenamos um valor double quando precisamos calular uma média que resultará em float mas com as variáveis que serão calculadas
+nessa operação sendo do tipo INT? Diferencie conversão explícita da implicita.
+
+19 - O que são operadores de atribuição compostos? Cite todos.
+
+20 - O que são operadores de incremento e decremento? 
+
+21 - Diferencie Pré-incremento/Pré-decremento de Pós-incremento e Pós-decremento
+
+22 - Dê exemplos dos: Operador condicional, operadores unários, operadores de coerção e operadores de atribuição.
+
+23 - Como criamos uma interface simples?
+
+24 - 
+
+
+
+
+
+
