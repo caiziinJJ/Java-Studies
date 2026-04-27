@@ -36,16 +36,21 @@ public class Simplex{
         //Primeiro eu vou printar a matriz antes das iterações
         int iteracoes = 0;
         System.out.printf("Quantidade de iterações: %d%n", iteracoes);
-        //Aqui eu vou identificar as minhas colunas básicas
-        int [] posicoesVariaveisBasicas = new int[0];
+        //Aqui eu vou  armazenar a posição das minhas colunas básicas
+        int [] posicoesVariaveisBasicas = new int[2];
         int contadorColunasBasicas = 0;
         for (int j = 0; j< matriz[0].length; j++){
             boolean colunaBasica = true;
             int posicaoUm = -1;
+            int contadorDeUm = 0;
             for (int i = 0; i < matriz.length; i++){
                 if(matriz[i][j] == 0 || matriz[i][j] == 1){
                     if (matriz [i][j] == 1){
                         posicaoUm = i;
+                        contadorDeUm++;
+                        if (contadorDeUm > 1){
+                            colunaBasica = false;
+                        }
                     }
                 }
                 else{
