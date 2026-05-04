@@ -36,9 +36,11 @@ public class Simplex{
         //Primeiro eu vou printar a matriz antes das iterações
         int iteracoes = 0;
         System.out.printf("Quantidade de iterações: %d%n", iteracoes);
-        //Aqui eu vou  armazenar a posição das minhas colunas básicas
-        int [] posicoesVariaveisBasicas = new int[2];
-        int contadorColunasBasicas = 0;
+        //Aqui eu vou armazenar a posição das minhas colunas básicas
+        int [] colunasBasicas = new int[matriz[0].length];
+        //Aqui eu vou armazenar a posição das minhas linhas básicas
+        int [] linhasBasicas = new int[matriz[0].length];
+        //Vou verificar se a minha coluna é basica ou não
         for (int j = 0; j< matriz[0].length; j++){
             boolean colunaBasica = true;
             int posicaoUm = -1;
@@ -58,37 +60,71 @@ public class Simplex{
                     break;
                 }
             }
-            if(colunaBasica && posicaoUm != 0){
-                contadorColunasBasicas++;
+            if(colunaBasica && posicaoUm != -1){
+                linhasBasicas[j] = posicaoUm;
+                colunasBasicas[j] = j;
             }
         }
-        System.out.printf("Quantidade de colunas básicas: %d%n",contadorColunasBasicas);
-        //aqui eu crio a variável que armazena o menor número da linha "b"
-        double menorNumeroArray = 0;
-        //aqui eu armazeno a coluna onde encontramos o número mais negativo
-        int posicaoColunaInferior = 0;
         //aqui eu crio um array que vai conter os elementos da linha "b". Eles são usados
-        //para definirmos qual variável se tornará básica através do cálculo que eu esqueci
-        //o nome. Vou negativá-los para eles voltarem ao "original"
-        double [] elementosFuncaoMae = new double[matriz[0].length];
+        //para definirmos qual variável se tornará básica através do cálculo de qual numero
+        //é menor influente na função objetivo. Vou negativá-los para eles voltarem ao "original"
+        double [] elementosLinhaB = new double[matriz[0].length];
+        double [] elementosFuncaoObjetivo = new double[3];
         for(int j = 0; j < matriz[0].length; j++){
-           elementosFuncaoMae[j] = matriz[0][j];
-           for(int i = 0; i < elementosFuncaoMae.length ; i++){
-               elementosFuncaoMae[i] = elementosFuncaoMae[i] * - 1;
-           }
+            elementosLinhaB[j] = matriz[matriz.length - 1][j];
+            if(j < 3) {
+                elementosFuncaoObjetivo[j] = matriz[matriz.length - 1][j];
+            }
+
         }
-        for (int i = 0; i < elementosFuncaoMae.length; i++){
-            System.out.printf("%8.2f", elementosFuncaoMae[i]);
+        for(int i = 0; i < elementosFuncaoObjetivo.length ; i++){
+            elementosFuncaoObjetivo[i] = (elementosFuncaoObjetivo[i] * - 1);
         }
-        /*
-        for(int j = 0; j < this.matriz[0].length; j++){
-            if(menorNumeroArray > matriz[matriz.length - 1][j]){
-                menorNumeroArray = matriz[matriz.length - 1][j];
-                posicaoColunaInferior = j;
+
+
+        //AQUI EU DESCUBRO QUAL VARIÁVEL VAI SE TORNAR BÁSICA ANALISANDO
+        //QUAL É A VARIÁVEL DE MAIOR IMPACTO. PARA ISSO EU VOU NA FUNÇÃO
+        //OBJETIVO E SUBSTITUO O VALOR DAS VARIÁVEIS POR "1", ASSIM A QUE
+        //TIVER O MAIOR VALOR COMO RESULTADO SERÁ ESCOLHIDA COMO V.B
+        int colunaNumeroMaiorImpacto = 0;
+        double maiorNumero = elementosFuncaoObjetivo[0];
+        for(int j = 0; j < elementosFuncaoObjetivo.length; j++){
+            if (elementosFuncaoObjetivo[j] > maiorNumero){
+                maiorNumero = elementosFuncaoObjetivo[j];
+                colunaNumeroMaiorImpacto = j;
             }
         }
 
-         */
+
+
+        //AQUI EU VOU DESCOBRIR QUAL VARIÁVEL VAI DEIXAR DE SER BÁSICA
+        //POIS AO DESCOBRIR QUAL VARIÁVEL É BÁSICA USAMOS OS ELEMENTOS
+        //DA SUA COLUNA COMO DIVISORES DOS ELEMENTOS DA """COLUNA""" B
+        //OU SEJA, A ULTIMA COLUNA.
+        double resultadoConta = 0;
+        double menorNumero = 0;
+        int linhaVariavelMenorNumero = 0;
+        for (int j = 0; j < matriz.length; j++ ){
+            resultadoConta = matriz[j][colunaNumeroMaiorImpacto] / matriz[j][matriz[0].length - 1];
+            if (menorNumero < resultadoConta){
+                double menorNumero1 = matriz[j][colunaNumeroMaiorImpacto];
+                linhaVariavelMenorNumero = j;
+            }
+        }
+
+        //NESSE MOMENTO COMEÇAREI O PROCESSO DE "BASIFICAÇÃO" DA MINHA
+        //COLUNA, TRANSFORMANDO O ELEMENTO DA POSIÇÃO PIVÔ EM 1, E OS
+        //DEMAIS EM 0. LEMBRANDO QUE EU MULTIPLICO TODOS OS ELEMENTOS
+        //DA LINHA DO MEU PIVÔ. A LINHA INTEIRA SERÁ MODIFICADA.
+        double valorPosicaoPivo = matriz[linhaVariavelMenorNumero][colunaNumeroMaiorImpacto];
+        for (int j = 0; j < matriz.length; j++ ) {
+            double variavelAuxiliar = matriz[linhaVariavelMenorNumero][j];
+            variavelAuxiliar = variavelAuxiliar * (1 / valorPosicaoPivo);
+            System.out.printf("Numero calculado %.2f%n", variavelAuxiliar);
+        }
+
+
+
     }
 
     public static void main(String[] args){
