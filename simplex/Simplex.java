@@ -120,18 +120,26 @@ public class Simplex{
         //DA LINHA DO MEU PIVÔ. A LINHA INTEIRA SERÁ MODIFICADA.
         double divisor = matriz[linhaVariavelMenorNumero][colunaNumeroMaiorImpacto];
         for (int i = 0; i < matriz[0].length; i++ ) {
-            matriz[linhaVariavelMenorNumero][i] = ( matriz[linhaVariavelMenorNumero][i] / divisor);
+            matriz[linhaVariavelMenorNumero][i] = ( matriz[linhaVariavelMenorNumero][i] * (1 / divisor));
+        }
+        System.out.println("MATRIZ inicial");
+        for (int i = 0; i<matriz.length; i++){
+            for (int j = 0; j<matriz[0].length; j++){
+                System.out.printf("%8.2f", matriz[i][j]);
+            }
+            System.out.println();
         }
         for(int i = 0; i < matriz.length ; i++) {
-            if( i == colunaNumeroMaiorImpacto){
+            if( i == linhaVariavelMenorNumero){
                 continue;
             }
             for (int j = 0; j < matriz.length; j++) {
-                matriz[i][j] = matriz[i][j] - matriz[i][colunaNumeroMaiorImpacto];
+                double divisor2 = (- matriz[linhaVariavelMenorNumero][j]) / matriz[i][j];
+                matriz[i][j] = matriz[i][j] + (- matriz[linhaVariavelMenorNumero][j]) / divisor2;
                 System.out.printf("Valor na coluna %d da linha %d: %.2f%n", j, i, matriz[i][j]);
             }
         }
-
+        System.out.println("MATRIZ FINAL");
         for (int i = 0; i<matriz.length; i++){
             for (int j = 0; j<matriz[0].length; j++){
                 System.out.printf("%8.2f", matriz[i][j]);
@@ -146,10 +154,10 @@ public class Simplex{
 
     public static void main(String[] args){
         double [][] matrizSimplex = {
-                {1,1,1,1,0,0,0,40},
-                {2,1,-1,0,1,0,0,20},
-                {3,2,-1,0,0,1,0,30},
-                {-2,-3,-1,0,0,0,1,0}
+                {1,1,1,1,0,0,40},
+                {2,1,-1,0,1,0,20},
+                {3,2,-1,0,0,1,30},
+                {-2,-3,-1,0,0,0,0}
         };
         Simplex t1 = new Simplex("m1", 4, 8);
         //System.out.println(t1.matriz[0].length);
