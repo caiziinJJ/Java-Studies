@@ -89,6 +89,7 @@ public class Simplex{
         int colunaNumeroMaiorImpacto = 0;
         double maiorNumero = elementosFuncaoObjetivo[0];
         for(int j = 0; j < elementosFuncaoObjetivo.length; j++){
+            elementosFuncaoObjetivo[j] = elementosFuncaoObjetivo[j] * 1;
             if (elementosFuncaoObjetivo[j] > maiorNumero){
                 maiorNumero = elementosFuncaoObjetivo[j];
                 colunaNumeroMaiorImpacto = j;
@@ -99,29 +100,45 @@ public class Simplex{
 
         //AQUI EU VOU DESCOBRIR QUAL VARIÁVEL VAI DEIXAR DE SER BÁSICA
         //POIS AO DESCOBRIR QUAL VARIÁVEL É BÁSICA USAMOS OS ELEMENTOS
-        //DA SUA COLUNA COMO DIVISORES DOS ELEMENTOS DA """COLUNA""" B
+        //DA SUA COLUNA QUE FOI ESCOLHIDA COMO BÁSICA COMO DIVISORES DOS RESPECTIVOS ELEMENTOS DA """COLUNA""" B
         //OU SEJA, A ULTIMA COLUNA.
         double resultadoConta = 0;
-        double menorNumero = 0;
+        double menorNumero = matriz[0][matriz[0].length-1];
         int linhaVariavelMenorNumero = 0;
-        for (int j = 0; j < matriz.length; j++ ){
-            resultadoConta = matriz[j][colunaNumeroMaiorImpacto] / matriz[j][matriz[0].length - 1];
-            if (menorNumero < resultadoConta){
-                double menorNumero1 = matriz[j][colunaNumeroMaiorImpacto];
-                linhaVariavelMenorNumero = j;
+        for (int j = 0; j < matriz.length -1 ; j++ ){ //COLOQUEI O -1 POIS NÃO ERA PRA COMPARAR COM A ÚLTIMA LINHA
+            resultadoConta = matriz[j][matriz[0].length - 1] / matriz[j][colunaNumeroMaiorImpacto] ;
+            if (menorNumero > resultadoConta){
+                menorNumero = resultadoConta;
+                linhaVariavelMenorNumero  = j;
             }
         }
+
 
         //NESSE MOMENTO COMEÇAREI O PROCESSO DE "BASIFICAÇÃO" DA MINHA
         //COLUNA, TRANSFORMANDO O ELEMENTO DA POSIÇÃO PIVÔ EM 1, E OS
         //DEMAIS EM 0. LEMBRANDO QUE EU MULTIPLICO TODOS OS ELEMENTOS
         //DA LINHA DO MEU PIVÔ. A LINHA INTEIRA SERÁ MODIFICADA.
-        double valorPosicaoPivo = matriz[linhaVariavelMenorNumero][colunaNumeroMaiorImpacto];
-        for (int j = 0; j < matriz.length; j++ ) {
-            double variavelAuxiliar = matriz[linhaVariavelMenorNumero][j];
-            variavelAuxiliar = variavelAuxiliar * (1 / valorPosicaoPivo);
-            System.out.printf("Numero calculado %.2f%n", variavelAuxiliar);
+        double divisor = matriz[linhaVariavelMenorNumero][colunaNumeroMaiorImpacto];
+        for (int i = 0; i < matriz[0].length; i++ ) {
+            matriz[linhaVariavelMenorNumero][i] = ( matriz[linhaVariavelMenorNumero][i] / divisor);
         }
+        for(int i = 0; i < matriz.length ; i++) {
+            if( i == colunaNumeroMaiorImpacto){
+                continue;
+            }
+            for (int j = 0; j < matriz.length; j++) {
+                matriz[i][j] = matriz[i][j] - matriz[i][colunaNumeroMaiorImpacto];
+                System.out.printf("Valor na coluna %d da linha %d: %.2f%n", j, i, matriz[i][j]);
+            }
+        }
+
+        for (int i = 0; i<matriz.length; i++){
+            for (int j = 0; j<matriz[0].length; j++){
+                System.out.printf("%8.2f", matriz[i][j]);
+            }
+            System.out.println();
+        }
+
 
 
 
