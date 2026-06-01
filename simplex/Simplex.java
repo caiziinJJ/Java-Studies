@@ -23,10 +23,10 @@ public class Simplex{
             }
         }
     }
-    public void verMatriz(){
-        for(int i = 0; i < this.linhas; i++) {
-            for (int j = 0; j < this.linhas; j++) {
-                System.out.printf("%8.2f", this.matriz[i][j]);
+    public void verMatriz(double [][] matriz){
+        for(int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                System.out.printf("%8.2f", matriz[i][j]);
             }
             System.out.println();
         }
@@ -123,33 +123,19 @@ public class Simplex{
             matriz[linhaVariavelMenorNumero][i] = ( matriz[linhaVariavelMenorNumero][i] * (1 / divisor));
         }
         System.out.println("MATRIZ inicial");
-        for (int i = 0; i<matriz.length; i++){
-            for (int j = 0; j<matriz[0].length; j++){
-                System.out.printf("%8.2f", matriz[i][j]);
-            }
-            System.out.println();
-        }
+        verMatriz(matriz);
         for(int i = 0; i < matriz.length ; i++) {
+            double multiplicador = (matriz[i][colunaNumeroMaiorImpacto] * -1) / matriz[linhaVariavelMenorNumero][colunaNumeroMaiorImpacto];
             if( i == linhaVariavelMenorNumero){
                 continue;
             }
-            for (int j = 0; j < matriz.length; j++) {
-                double divisor2 = (- matriz[linhaVariavelMenorNumero][j]) / matriz[i][j];
-                matriz[i][j] = matriz[i][j] + (- matriz[linhaVariavelMenorNumero][j]) / divisor2;
+            for (int j = 0; j < matriz[0].length; j++) {
+                matriz[i][j] = matriz[linhaVariavelMenorNumero][j] * multiplicador + matriz[i][j];
                 System.out.printf("Valor na coluna %d da linha %d: %.2f%n", j, i, matriz[i][j]);
             }
         }
         System.out.println("MATRIZ FINAL");
-        for (int i = 0; i<matriz.length; i++){
-            for (int j = 0; j<matriz[0].length; j++){
-                System.out.printf("%8.2f", matriz[i][j]);
-            }
-            System.out.println();
-        }
-
-
-
-
+        verMatriz(matriz);
     }
 
     public static void main(String[] args){
