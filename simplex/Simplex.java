@@ -48,6 +48,7 @@ public class Simplex{
             }
             System.out.println();
         }
+        System.out.println();
     }
     public boolean possuiApenasPositivosNaUltimaLinha(double[][] matriz){
         for (int j = 0; j < matriz[0].length - 1; j++){
@@ -59,6 +60,7 @@ public class Simplex{
     }
     public void identificarColunasBasicas (double [][]matriz){
         colunasBasicas = new int[matriz[0].length];
+        colunasBasicas[0] = -1;
         //Aqui eu vou armazenar a posição das minhas linhas básicas
         posicaoUmColunasBasicas = new int[matriz[0].length];
 
@@ -87,6 +89,7 @@ public class Simplex{
                 colunasBasicas[j] = j;
             }
         }
+        verArrayInt(colunasBasicas);
     }
     public void primeiraVezDefinindoColunasBasicasENaoBasicas(double[][] matriz){
         //aqui eu crio um array que vai conter os elementos da linha "b". Eles são usados
@@ -139,6 +142,7 @@ public class Simplex{
                 colunaVariavelMaiorImpacto = j;
             }
         }
+        System.out.println("Coluna de maior impacto: "+colunaVariavelMaiorImpacto);
         double menorRazao = Double.MAX_VALUE;
         for (int i = 0; i < matriz.length - 1; i++){
             if(matriz[i][colunaVariavelMaiorImpacto] > 0){
@@ -149,21 +153,22 @@ public class Simplex{
                 }
             }
         }
-        System.out.println("\nColuna pivô: " + colunaVariavelMaiorImpacto);
-        System.out.println("Linha pivô: " + linhaVariavelMenorImpacto);
-        System.out.println("Menor razão encontrada: " + menorRazao);
+        System.out.println("Linha de menor impacto: "+linhaVariavelMenorImpacto);
+//        System.out.println("\nColuna pivô: " + colunaVariavelMaiorImpacto);
+//        System.out.println("Linha pivô: " + linhaVariavelMenorImpacto);
+//        System.out.println("Menor razão encontrada: " + menorRazao);
     }
     public void basificacaoDoTablo(double[][] matriz){
         //NESSE MOMENTO COMEÇAREI O PROCESSO DE "BASIFICAÇÃO" DA MINHA
         //COLUNA, TRANSFORMANDO O ELEMENTO DA POSIÇÃO PIVÔ EM 1, E OS
         //DEMAIS EM 0. LEMBRANDO QUE EU MULTIPLICO TODOS OS ELEMENTOS
         //DA LINHA DO MEU PIVÔ. A LINHA INTEIRA SERÁ MODIFICADA.
-        double divisor = matriz[linhaVariavelMenorImpacto][colunaVariavelMaiorImpacto];
-        for (int i = 0; i < matriz[0].length; i++ ) {
-            matriz[linhaVariavelMenorImpacto][i] = ( matriz[linhaVariavelMenorImpacto][i] * (1 / divisor));
-        }
         System.out.println("MATRIZ inicial");
         verMatriz(matriz);
+        double valorDoPivo = matriz[linhaVariavelMenorImpacto][colunaVariavelMaiorImpacto];
+        for (int j = 0; j < matriz[0].length; j++ ) {
+            matriz[linhaVariavelMenorImpacto][j] = matriz[linhaVariavelMenorImpacto][j] / valorDoPivo;
+        }
         for(int i = 0; i < matriz.length ; i++) {
             double multiplicador = (matriz[i][colunaVariavelMaiorImpacto] * -1) / matriz[linhaVariavelMenorImpacto][colunaVariavelMaiorImpacto];
             if( i == linhaVariavelMenorImpacto){
@@ -175,6 +180,34 @@ public class Simplex{
             }
         }
         System.out.println("MATRIZ FINAL");
+        verMatriz(matriz);
+    }
+    public void basificacaoDoTabloTeste(double[][] matriz){
+        // 1. Identificar o valor do pivô antes de qualquer alteração
+        double valorPivo = matriz[linhaVariavelMenorImpacto][colunaVariavelMaiorImpacto];
+
+        System.out.println("Normalizando linha do pivô para 1...");
+        // 2. Tornar o elemento pivô igual a 1
+        for (int j = 0; j < matriz[0].length; j++) {
+            matriz[linhaVariavelMenorImpacto][j] = matriz[linhaVariavelMenorImpacto][j] / valorPivo;
+        }
+
+        System.out.println("Zerando demais elementos da coluna...");
+        // 3. Tornar os outros elementos da coluna pivô iguais a zero
+        for (int i = 0; i < matriz.length; i++) {
+            // Não alteramos a linha do pivô, pois ela já foi normalizada
+            if (i != linhaVariavelMenorImpacto) {
+                // O fator para zerar é o valor atual na coluna pivô da linha i
+                double fatorParaZerar = matriz[i][colunaVariavelMaiorImpacto];
+
+                for (int j = 0; j < matriz[0].length; j++) {
+                    // Nova Linha = Linha Atual - (fatorParaZerar * Linha do Pivô)
+                    matriz[i][j] = matriz[i][j] - (fatorParaZerar * matriz[linhaVariavelMenorImpacto][j]);
+                }
+            }
+        }
+
+        System.out.println("MATRIZ APÓS BASIFICAÇÃO:");
         verMatriz(matriz);
     }
 
@@ -190,9 +223,8 @@ public class Simplex{
         System.out.printf("Quantidade de iterações: %d%n", iteracoes);
         identificarColunasBasicas(matriz);
         definindoColunasBasicasENaoBasicas(matriz);
-        basificacaoDoTablo(matriz);
-        iteracoes++;
-        System.out.printf("Quantidade de iterações: %d%n", iteracoes);
+        basificacaoDoTabloTeste(matriz);
+
 
 
 //        do {
