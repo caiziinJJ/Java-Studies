@@ -31,6 +31,16 @@ public class Simplex{
             }
         }
     }
+    public void verArrayInt(int[] posicaoUmColunasBasicas){
+        for(int i = 0; i < posicaoUmColunasBasicas.length; i++) {
+            System.out.printf("%d, ", posicaoUmColunasBasicas[i]);
+        }
+    }
+    public void verArrayDouble(double[] arrayDouble){
+        for(int i = 0; i < arrayDouble.length; i++) {
+            System.out.printf("%.2f, ", arrayDouble[i]);
+        }
+    }
     public void verMatriz(double [][] matriz){
         for(int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[0].length; j++) {
@@ -78,7 +88,7 @@ public class Simplex{
             }
         }
     }
-    public void definindoColunasBasicasENaoBasicas(double[][] matriz){
+    public void primeiraVezDefinindoColunasBasicasENaoBasicas(double[][] matriz){
         //aqui eu crio um array que vai conter os elementos da linha "b". Eles são usados
         //para definirmos qual variável se tornará básica através do cálculo de qual numero
         //é menor influente na função objetivo. Vou negativá-los para eles voltarem ao "original"
@@ -117,6 +127,30 @@ public class Simplex{
             }
         }
     }
+    public void definindoColunasBasicasENaoBasicas(double[][] matriz){
+        double [] elementosLinhaB = new double[matriz[0].length];
+        for(int j = 0; j < matriz[0].length; j++){
+            elementosLinhaB[j] = matriz[matriz.length - 1][j];
+        }
+        for(int j = 0; j < elementosLinhaB.length - 1; j++){
+            double menorNumero = 0;
+            if (elementosLinhaB[j] < menorNumero){
+                menorNumero = elementosLinhaB[j];
+                colunaVariavelMaiorImpacto = j;
+            }
+        }
+        double resultadoOperacaoColunaNaoBasica = 0;
+            for (int i = 0; i < matriz.length; i++){
+                double menorNumero = 0;
+                if(matriz[i][colunaVariavelMaiorImpacto] >= 0){
+                    resultadoOperacaoColunaNaoBasica = matriz[i][matriz[0].length - 1] / matriz[i][colunaVariavelMaiorImpacto];
+                    if(menorNumero > resultadoOperacaoColunaNaoBasica){
+                        menorNumero = resultadoOperacaoColunaNaoBasica;
+                        linhaVariavelMenorImpacto = i;
+                    }
+                }
+            }
+    }
     public void basificacaoDoTablo(double[][] matriz){
         //NESSE MOMENTO COMEÇAREI O PROCESSO DE "BASIFICAÇÃO" DA MINHA
         //COLUNA, TRANSFORMANDO O ELEMENTO DA POSIÇÃO PIVÔ EM 1, E OS
@@ -146,17 +180,25 @@ public class Simplex{
         //Primeiro eu vou printar a matriz antes das iterações
         int iteracoes = 0;
         System.out.printf("Quantidade de iterações: %d%n", iteracoes);
-        while (!possuiApenasPositivosNaUltimaLinha(matriz)){
-            identificarColunasBasicas(matriz);
-            definindoColunasBasicasENaoBasicas(matriz);
-            basificacaoDoTablo(matriz);
-            iteracoes++;
-            System.out.printf("Quantidade de iterações: %d%n", iteracoes);
-            if (iteracoes > 5) {
-                System.out.println("Parada de segurança: O algoritmo atingiu 20 iterações.");
-                break;
-            }
-        }
+        //boolean jaBasificada = tabloJaBasificado(matriz);
+        identificarColunasBasicas(matriz);
+        verArrayInt(colunasBasicas);
+        primeiraVezDefinindoColunasBasicasENaoBasicas(matriz);
+        basificacaoDoTablo(matriz);
+        iteracoes++;
+        System.out.printf("Quantidade de iterações: %d%n", iteracoes);
+        identificarColunasBasicas(matriz);
+        verArrayInt(colunasBasicas);
+        definindoColunasBasicasENaoBasicas(matriz);
+
+//        do {
+//            identificarColunasBasicas(matriz);
+//            primeiraVezDefinindoColunasBasicasENaoBasicas(matriz);
+//            basificacaoDoTablo(matriz);
+//            iteracoes++;
+//            System.out.printf("Quantidade de iterações: %d%n", iteracoes);
+//        }while(jaBasificada ==false || iteracoes == 5);
+
     }
 
     public static void main(String[] args){
