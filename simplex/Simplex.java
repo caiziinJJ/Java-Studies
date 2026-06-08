@@ -132,24 +132,26 @@ public class Simplex{
         for(int j = 0; j < matriz[0].length; j++){
             elementosLinhaB[j] = matriz[matriz.length - 1][j];
         }
+        double menorValorObjetivo = 0;
         for(int j = 0; j < elementosLinhaB.length - 1; j++){
-            double menorNumero = 0;
-            if (elementosLinhaB[j] < menorNumero){
-                menorNumero = elementosLinhaB[j];
+            if (elementosLinhaB[j] < menorValorObjetivo){
+                menorValorObjetivo = elementosLinhaB[j];
                 colunaVariavelMaiorImpacto = j;
             }
         }
-        double resultadoOperacaoColunaNaoBasica = 0;
-            for (int i = 0; i < matriz.length; i++){
-                double menorNumero = 0;
-                if(matriz[i][colunaVariavelMaiorImpacto] >= 0){
-                    resultadoOperacaoColunaNaoBasica = matriz[i][matriz[0].length - 1] / matriz[i][colunaVariavelMaiorImpacto];
-                    if(menorNumero > resultadoOperacaoColunaNaoBasica){
-                        menorNumero = resultadoOperacaoColunaNaoBasica;
-                        linhaVariavelMenorImpacto = i;
-                    }
+        double menorRazao = Double.MAX_VALUE;
+        for (int i = 0; i < matriz.length - 1; i++){
+            if(matriz[i][colunaVariavelMaiorImpacto] > 0){
+                double resultadoOperacaoColunaNaoBasica = matriz[i][matriz[0].length - 1] / matriz[i][colunaVariavelMaiorImpacto];
+                if(menorRazao > resultadoOperacaoColunaNaoBasica){
+                    menorRazao = resultadoOperacaoColunaNaoBasica;
+                    linhaVariavelMenorImpacto = i;
                 }
             }
+        }
+        System.out.println("\nColuna pivô: " + colunaVariavelMaiorImpacto);
+        System.out.println("Linha pivô: " + linhaVariavelMenorImpacto);
+        System.out.println("Menor razão encontrada: " + menorRazao);
     }
     public void basificacaoDoTablo(double[][] matriz){
         //NESSE MOMENTO COMEÇAREI O PROCESSO DE "BASIFICAÇÃO" DA MINHA
@@ -182,14 +184,16 @@ public class Simplex{
         System.out.printf("Quantidade de iterações: %d%n", iteracoes);
         //boolean jaBasificada = tabloJaBasificado(matriz);
         identificarColunasBasicas(matriz);
-        verArrayInt(colunasBasicas);
         primeiraVezDefinindoColunasBasicasENaoBasicas(matriz);
         basificacaoDoTablo(matriz);
         iteracoes++;
         System.out.printf("Quantidade de iterações: %d%n", iteracoes);
         identificarColunasBasicas(matriz);
-        verArrayInt(colunasBasicas);
         definindoColunasBasicasENaoBasicas(matriz);
+        basificacaoDoTablo(matriz);
+        iteracoes++;
+        System.out.printf("Quantidade de iterações: %d%n", iteracoes);
+
 
 //        do {
 //            identificarColunasBasicas(matriz);
