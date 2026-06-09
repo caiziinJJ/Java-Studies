@@ -85,11 +85,11 @@ public class Simplex{
                 }
             }
             if(colunaBasica && posicaoUm != -1){
+                //Armazenamos esse valor para saber a linha do pivô
                 posicaoUmColunasBasicas[j] = posicaoUm;
                 colunasBasicas[j] = j;
             }
         }
-        verArrayInt(colunasBasicas);
     }
     public void primeiraVezDefinindoColunasBasicasENaoBasicas(double[][] matriz){
         //aqui eu crio um array que vai conter os elementos da linha "b". Eles são usados
@@ -184,15 +184,13 @@ public class Simplex{
     }
     public void basificacaoDoTabloTeste(double[][] matriz){
         // 1. Identificar o valor do pivô antes de qualquer alteração
-        double valorPivo = matriz[linhaVariavelMenorImpacto][colunaVariavelMaiorImpacto];
+        double divisor = matriz[linhaVariavelMenorImpacto][colunaVariavelMaiorImpacto];
 
-        System.out.println("Normalizando linha do pivô para 1...");
         // 2. Tornar o elemento pivô igual a 1
         for (int j = 0; j < matriz[0].length; j++) {
-            matriz[linhaVariavelMenorImpacto][j] = matriz[linhaVariavelMenorImpacto][j] / valorPivo;
+            matriz[linhaVariavelMenorImpacto][j] = matriz[linhaVariavelMenorImpacto][j]  / divisor;
         }
 
-        System.out.println("Zerando demais elementos da coluna...");
         // 3. Tornar os outros elementos da coluna pivô iguais a zero
         for (int i = 0; i < matriz.length; i++) {
             // Não alteramos a linha do pivô, pois ela já foi normalizada
@@ -224,7 +222,13 @@ public class Simplex{
         identificarColunasBasicas(matriz);
         definindoColunasBasicasENaoBasicas(matriz);
         basificacaoDoTabloTeste(matriz);
-
+        iteracoes++;
+        System.out.printf("Quantidade de iterações: %d%n", iteracoes);
+        identificarColunasBasicas(matriz);
+        definindoColunasBasicasENaoBasicas(matriz);
+        basificacaoDoTabloTeste(matriz);
+        iteracoes++;
+        System.out.printf("Quantidade de iterações: %d%n", iteracoes);
 
 
 //        do {
@@ -243,6 +247,7 @@ public class Simplex{
                 {2,1,-1,0,1,0,20},
                 {3,2,-1,0,0,1,30},
                 {-2,-3,-1,0,0,0,0}
+
         };
         Simplex t1 = new Simplex("m1", 4, 8);
         //System.out.println(t1.matriz[0].length);
